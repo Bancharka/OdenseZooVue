@@ -1,0 +1,174 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, menu, nav, output, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+}
+
+body {
+  background-color: #E3EDCF;
+    
+}
+
+@font-face {
+  font-family: montylight;
+  src: url("/src/assets/Fonts/Monty-Light.otf");
+}
+
+@font-face {
+  font-family: montyreg;
+  src: url("/src/assets/Fonts/Monty-Regular.otf");
+}
+
+@font-face {
+  font-family: montybold;
+  src: url("/src/assets/Fonts/Monty-Bold.otf");
+}
+
+@font-face {
+  font-family: montyblack;
+  src: url("/src/assets/Fonts/Monty-Black.otf");  
+}
+
+h1 {
+  font-family: montyblack;
+  font-size: 65px;
+}
+
+h2 {
+  font-family: montybold;
+  font-size: 35px;    
+}
+
+h3 {
+  font-family: montyreg;
+  font-size: 30px;
+}
+
+p {
+  font-family: montyreg;
+
+}
+
+
+
+
+/* her styles fordele og vilde venner knapper */
+#headercont {
+  display: flex;
+  width: 100%; 
+  height: 70px;     
+  justify-content: space-around;
+  align-items: center;
+}
+
+#fordeleknap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: montyreg;
+  background-color: #abd18f;  
+  width: 166px;
+  color: white;
+  border-radius: 50px;
+  height: 40px;
+
+}
+
+#vildevennerknap {
+  display: flex;
+  background-color: #00543D;
+  color: white;
+  border-radius: 50px;
+  align-items: center;
+  justify-content: center;
+  font-family: montyreg;
+  width: 166px;       
+  height: 40px;
+  
+
+
+}
+
+/* her stopper styling af fordele og vilde venner knapper */
+
+
+
+/* Her styles point display */
+
+#pointdisplay {
+  display: flex;
+  justify-content: center;    
+
+}
+
+.backgroundcard {
+  display: flex;
+  align-items: center;
+  justify-content: center;        
+  gap: 40px;
+  height: 180px;
+  background-color: goldenrod;
+  width: 350px;
+  border-radius: 4px;     
+  color: white;     
+}
+
+
+
+#pdissmall {
+  font-size: 30px;
+  display: flex;
+  align-items: center;    
+  justify-content: center;
+  
+}
+
+.pdis {
+  font-family: montyblack;
+}
+
+
+/* Her stopper styling af point display */
+
+
+
+
+
+
+
+
+/* Her styles menu knapper bunden  */
+footer {
+  position: fixed;
+  bottom: 0px;
+  background-color: #ABD18F;
+  width: 100%;
+  height: 82px;
+  
+}
+
+#footer-box {
+  display: flex;
+  justify-content: space-around;
+  height: 100%;   
+  align-items: center; 
+  
+  
+}
+
+#footer-box img {
+  height: 25px;
+} 
+
+.menu-points {
+  display: flex;
+  align-items: center;    
+  flex-direction: column;
+  background-color: white;
+  border-radius: 10px;
+  padding: 5px;
+}
+/* Her stopper styling menu knapper bunden */
+
