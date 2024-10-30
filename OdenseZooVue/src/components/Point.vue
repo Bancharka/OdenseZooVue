@@ -1,59 +1,40 @@
+<script setup>
+import {ref} from 'vue';
+
+const points = ref([]);
+
+const getPoints = () => {
+  const requestOptions = {
+  method: "GET",
+  redirect: "follow"
+};
+
+  fetch("https://odensezooapp-default-rtdb.europe-west1.firebasedatabase.app/users.json", requestOptions)
+    .then((response) => {
+      return response.json()
+    })
+    .then((result) => {
+      const objectKeys = Object.keys(result);
+
+      for (const key in objectKeys) {
+        points.value.push(result[objectKeys[key]]);
+      }
+    })
+    .catch((error) => {
+      console.error(error)
+    });
+};
+
+getPoints ();
+</script>
 
 <template>
-
-<div id="app">
-  <ul>
-    <li v-for="user in users" :key="user.uid">
-      {{ user.name }}: {{ user.points }} points
-    </li>
-  </ul>
-</div>
-  </template>
-  
-  <script>
-    import { database } from '../firebase.js';
-    import { ref, onValue } from 'firebase/database';
-
-<template>
-  <div id="app">
+  <div>
+    <h1>Points</h1>
     <ul>
-      <li v-for="user in users" :key="user.uid">
-        {{ user.name }}: {{ user.points }} points
+      <li v-for="user in users">
+        <h2>{{ user.name }}</h2>
       </li>
     </ul>
   </div>
 </template>
-
-<script>
-import { database } from './firebase.js';
-
-export default {
-  data() {
-    return {
-      users: [] // Initialize as an empty array
-    };
-  },
-  created() {
-    this.fetchUsers();
-  },
-  methods: {
-    async fetchUsers() {
-      try {
-        const usersRef = database.ref('users');
-        usersRef.on('value', snapshot => {
-          const data = snapshot.val();
-          const usersArray = Object.keys(data).map(key => ({
-            uid: key,
-            ...data[key]
-          }));
-          this.users = usersArray;
-        });
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
-    }
-  }
-};
-</script>
-
-</script>
