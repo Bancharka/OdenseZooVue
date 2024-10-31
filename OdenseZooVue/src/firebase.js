@@ -1,13 +1,8 @@
-// Import the functions you need from the SDKs you need
+// firebase.js
 import { initializeApp } from "firebase/app";
 import { getAuth } from 'firebase/auth';  
 import { getDatabase } from "firebase/database";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyC4kOoudggIlI-V_RexlRBCBGhBQjR23Vs",
   authDomain: "odensezooapp.firebaseapp.com",
@@ -18,9 +13,8 @@ const firebaseConfig = {
   databaseURL: "https://odensezooapp-default-rtdb.europe-west1.firebasedatabase.app/"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);  
 const database = getDatabase(app);
 
-export { database };
+export { app, auth, database };
