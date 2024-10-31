@@ -33,7 +33,7 @@ onMounted(getPoints);
     <h1>Points</h1>
     <ul>
       <li v-for="(user, index) in points" :key="index">
-        <h2>{{ user.name }}</h2>
+        <h2>{{ user.name }}, {{ user.points }}</h2>
       </li>
     </ul>
   </div>
