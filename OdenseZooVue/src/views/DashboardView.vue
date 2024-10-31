@@ -1,5 +1,6 @@
 <script setup>
 import Points from '../components/Point.vue'
+import Coupons from '../components/Coupon.vue'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getDatabase, ref as dbRef, onValue } from "firebase/database";
 import { auth, database } from '../firebase'; // Adjust the path as necessary
@@ -24,4 +25,5 @@ onAuthStateChanged(auth, (user) => {
 
 <template>
     <Points />
+    <Coupons />
 </template>

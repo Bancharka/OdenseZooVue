@@ -18,3 +18,6 @@ const auth = getAuth(app);
 const database = getDatabase(app);
 
 export { app, auth, database };
+import { getStorage } from "firebase/storage";
+const storage = getStorage(app);
+export { storage };
