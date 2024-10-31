@@ -1,0 +1,56 @@
+{
+  "coupons": {
+    "coupon_id_1": {
+      "name": "10% rabat pomfritter",
+      "points": 100,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/odensezooapp.appspot.com/o/kupon%20standard%20pomfritter.png?alt=media&token=47e7576d-a5a3-4c46-8a44-8144be30895b",
+      "description":"Få 10% rabat på pomfritter",
+      "valid_until": "2024-12-31"
+    },
+    "coupon_id_2": {
+      "name": "40% rabat filterkaffe",
+      "points": 200,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/odensezooapp.appspot.com/o/kupon%20standard%20kaffe.png?alt=media&token=c346f84e-be76-4462-be57-85b69e12af41",
+      "description": "Få 10% rabat på filterkaffe",
+      "valid_until": "2024-12-31"
+    },
+    "coupon_id_3": {
+      "name": "20% rabat dyr",
+      "points": 250,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/odensezooapp.appspot.com/o/kupon%20standard%20dyr.png?alt=media&token=6db01b0f-94f9-46e4-a680-929ba8c9e8cf",
+      "description": "Få 20% rabat på 1 Schleich dyr",
+      "valid_until": "2024-12-31"
+    },
+    "coupon_id_4": {
+      "name": "50% rabat filterkaffe",
+      "points": 0,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/odensezooapp.appspot.com/o/kupon%20%C3%A6gg%20kaffe.png?alt=media&token=77c09689-5c8b-4ccf-aeb5-ace5b3faf47a",
+      "description": "Få 50% rabat på filterkaffe",
+      "valid_until": "2024-12-31"
+    },
+    "coupon_id_5": {
+      "name": "gratis kaffe",
+      "points": 0,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/odensezooapp.appspot.com/o/kupon%20%C3%A6gg%20gratis%20kaffe.png?alt=media&token=9d8fd331-dece-4232-bbca-1b0dadf7293a",
+      "description": "Få 1 gratis filterkaffe",
+      "valid_until": "2024-12-31"
+    },
+    "coupon_id_6": {
+      "name": "gratis is",
+      "points": 0,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/odensezooapp.appspot.com/o/kupon%20%C3%A6gg%20is_2.png?alt=media&token=54706ec3-cfd6-48ee-9192-2af788baec93",
+      "description": "Få 1 gratis valgfri is",
+      "valid_until": "2024-12-31"
+    }
+  },
+
+  "users": {
+    "user_id_1": {
+      "name": "Maria",
+      "points": 500,
+      "available_coupons": {
+        "coupon_id_1": true
+      }
+    }
+  }
+}
