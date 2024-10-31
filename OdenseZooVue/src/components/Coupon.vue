@@ -16,43 +16,41 @@
 </template>
 
 <script>
-import { database } from "@/firebase"; // Stelle sicher, dass der Pfad korrekt ist
+import { database } from "@/firebase"; // Pfad anpassen, wenn nötig
 import { ref, get, update } from "firebase/database"; // Importiere ref, get und update
 import { getAuth } from "firebase/auth"; // Importiere Firebase Auth
+import { onMounted } from 'vue'; // Importiere onMounted
 
 export default {
   data() {
     return {
-      availableCoupon: null, // Coupon, der verfügbar ist
+      availableCoupon: null,
       user: {
-        available_coupons: {}, // Store available coupons
-        points: 0 // Initialize points
+        available_coupons: {},
+        points: 0
       },
-      userId: null // Hier wird die UID des aktuellen Benutzers gespeichert
+      userId: null
     };
   },
 
   methods: {
     async loadCoupons() {
       try {
-        const couponsRef = ref(database, 'coupons'); // Verwende ref für die Datenbankreferenz
-        const snapshot = await get(couponsRef); // Verwende get, um die Daten abzurufen
+        const couponsRef = ref(database, 'coupons');
+        const snapshot = await get(couponsRef);
 
         if (snapshot.exists()) {
           const allCoupons = snapshot.val();
-          console.log("Alle Coupons:", allCoupons); // Debugging: alle Coupons anzeigen
+          console.log("Alle Coupons:", allCoupons);
 
-          // Finde den Coupon, der dem Benutzer zugeordnet ist und verfügbar ist
           const availableCoupons = Object.entries(allCoupons).filter(([id, coupon]) => {
             return this.user.available_coupons[id]; // Coupon ist verfügbar
           });
 
-          console.log("Verfügbare Coupons:", availableCoupons); // Debugging: verfügbare Coupons anzeigen
-
           if (availableCoupons.length > 0) {
             const [id, coupon] = availableCoupons[0]; // Nimm den ersten verfügbaren Coupon
-            this.availableCoupon = { id, ...coupon }; // Setze den verfügbaren Coupon
-            console.log("Verfügbarer Coupon:", this.availableCoupon); // Debugging: aktuellen Coupon anzeigen
+            this.availableCoupon = { id, ...coupon };
+            console.log("Verfügbarer Coupon:", this.availableCoupon);
           } else {
             console.log("Keine verfügbaren Coupons gefunden.");
           }
@@ -66,17 +64,17 @@ export default {
 
     async loadUserData() {
       try {
-        const auth = getAuth(); // Auth-Instanz holen
-        const user = auth.currentUser; // Aktuell angemeldeten Benutzer abfragen
+        const auth = getAuth();
+        const user = auth.currentUser;
 
         if (user) {
-          this.userId = user.uid; // Setze die UID des aktuellen Benutzers
-          const userRef = ref(database, `users/${this.userId}`); // Verwende ref für die Datenbankreferenz
-          const snapshot = await get(userRef); // Verwende get, um die Daten abzurufen
+          this.userId = user.uid;
+          const userRef = ref(database, `users/${this.userId}`);
+          const snapshot = await get(userRef);
 
           if (snapshot.exists()) {
             this.user = snapshot.val() || { available_coupons: {} };
-            console.log("Benutzerdaten geladen:", this.user); // Debugging: Benutzerdaten anzeigen
+            console.log("Benutzerdaten geladen:", this.user);
           } else {
             console.error("Benutzerdaten nicht gefunden.");
           }
@@ -91,15 +89,14 @@ export default {
     async redeemCoupon(couponId, couponPoints) {
       if (this.user.points >= couponPoints) {
         this.user.points -= couponPoints;
-        this.user.available_coupons[couponId] = false; // Markiere den Coupon als nicht mehr verfügbar
+        this.user.available_coupons[couponId] = false;
 
         // Update Firebase-Datenbank
-        await update(ref(database, `users/${this.userId}`), { // Update der Datenbank
+        await update(ref(database, `users/${this.userId}`), {
           points: this.user.points,
           available_coupons: this.user.available_coupons
         });
         alert("Tillykke! Du har indløst din kupon!");
-        // Aktualisiere die angezeigten Coupons nach dem Einlösen
         await this.loadCoupons();
       } else {
         alert("Ikke nok point til at bruge kupon.");
