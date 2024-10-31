@@ -4,27 +4,18 @@ import Coupons from '../components/Coupon.vue'
 import { ref } from 'vue'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getDatabase, ref as dbRef, onValue } from "firebase/database";
-import { auth, database } from '../firebase'; // Adjust the path as necessary
+import { auth, database } from '../firebase'; // Pfad anpassen, wenn nötig
 
-const userPoints = ref(0);
+const userId = ref(null); // Halte die userId
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    const userId = user.uid;
-    const userRef = dbRef(database, 'users/' + userId);
-
-    onValue(userRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        userPoints.value = data.points;
-      }
-    });
+    userId.value = user.uid; // Setze die Benutzer-ID
   }
 });
-
 </script>
 
 <template>
-    <Points />
+    <Points :userId="userId" /> <!-- Übergib die userId als Prop -->
     <Coupons />
 </template>
