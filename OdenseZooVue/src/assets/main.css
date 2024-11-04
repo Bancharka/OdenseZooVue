@@ -25,3 +25,17 @@ h2 {
 p {
   color: black;
 }
+
+
+
+
+
+
+
+.pointbox {
+  background-color: grey;
+  display: flex;
+  align-items: center;
+  
+  height: 180px;
+}
