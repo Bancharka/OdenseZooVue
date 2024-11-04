@@ -5,13 +5,13 @@
             <div class="pointh1"><h2>navn</h2></div>
             <div class="pointsection">
                 <div>
-                    <p><img src="/public/img/roedpanda.png" alt=""></p>
+                    <p><img src="/src/img/roedpanda.png" alt=""></p>
                 </div>
                 
                 
                 <div class="pointbox">
                     <div v-if="points > 0">
-                        <div><h1> {{ points }}</h1></div>
+                        <div id="h1point"><h1> {{ points }}</h1></div>
                         <h3>Point</h3> <!-- Zeige die Punkte des aktuellen Benutzers an -->
                         
                     </div>
