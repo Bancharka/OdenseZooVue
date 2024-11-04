@@ -1,13 +1,20 @@
 <template>
   <div>
-    <h1>Points</h1>
-    <div v-if="points > 0">
-      <h2>Punkte: {{ points }}</h2> <!-- Zeige die Punkte des aktuellen Benutzers an -->
+        <div class="pointbox">
+            <div>
+                <p>image here</p>
+            </div>
+            <h1> Point</h1>
+
+            <div v-if="points > 0">
+                <h2>Point: {{ points }}</h2> <!-- Zeige die Punkte des aktuellen Benutzers an -->
+            </div>
+
+            <div v-else>
+                <p>Du har 0 point</p>
+            </div>
+        </div>
     </div>
-    <div v-else>
-      <p>Keine Punkte verfügbar.</p>
-    </div>
-  </div>
 </template>
 
 <script setup>
