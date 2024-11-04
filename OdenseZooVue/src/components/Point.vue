@@ -38,10 +38,10 @@
           <div class="pointbox">
             <div v-if="points > 0">
               <div id="h1point"><h1>{{ points }}</h1></div>
-              <h3>Point</h3> <!-- Zeige die Punkte des aktuellen Benutzers an -->
+              <h3 class="textwhite">Point</h3> <!-- Zeige die Punkte des aktuellen Benutzers an -->
             </div>
             <div v-else>
-              <h3>Du har 0 point</h3>
+              <h3 class="textwhite" >Du har 0 point</h3>
             </div>
           </div>
         </div>

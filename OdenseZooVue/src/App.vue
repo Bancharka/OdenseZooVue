@@ -14,21 +14,62 @@ import { RouterView } from 'vue-router';
 
 
 
-  <footer>
-    <nav id="botnav">
-      <router-link class="botnavcards" to=""><div>
-        <div>
-          Program
-        </div>
-        <div class="botnavpic">
-          <img src="/src/img/icon_anualpass.png" alt="">
-        </div>
-      </div>  </router-link> 
-      <router-link class="botnavcards" to=""> Årskort </router-link>  
-      <router-link class="botnavcards" to=""> Find vej </router-link>  
-      <router-link class="botnavcards" to="/dashboard"> Vilde Venner </router-link>  
-    </nav>
-  </footer>
+    <footer>
+        <nav id="botnav">
+            <router-link class="botnavcards" to="">
+                <div class="botnavalign">
+
+                <div >
+                    <img class="botnavpic" src="/src/img/icon_calendar.png" alt="">
+                </div>
+                <div class="botnavcolor">
+                    Program
+                </div>
+                
+                </div> 
+            </router-link> 
+
+            <router-link class="botnavcards" to=""> 
+                <div class="botnavalign">
+
+                    <div >
+                        <img class="botnavpic" src="/src/img/icon_anualpass.png" alt="">
+                    </div>
+                    <div class="botnavcolor" >
+                        Årskort
+                    </div>
+
+                </div> 
+            </router-link> 
+
+            <router-link class="botnavcards" to=""> 
+                <div class="botnavalign">
+
+                    <div >
+                        <img class="botnavpic" src="/src/img/icon_map.png" alt="">
+                    </div>
+                    <div class="botnavcolor">
+                        Find vej
+                    </div>
+
+                </div> 
+            </router-link> 
+        
+            <router-link class="botnavcards" to="/dashboard">
+                <div id="botnavactive"class="botnavalign">
+
+                    <div >
+                        <img class="botnavpic" src="/src/img/icon_anualpass_star.png" alt="">
+                    </div>
+                    <div class="botnavcolor">
+                        Vilde venner
+                    </div>
+
+                </div>  
+            </router-link>  
+
+        </nav>
+    </footer>
 
 
 

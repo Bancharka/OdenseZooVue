@@ -114,9 +114,18 @@ export default {
 
   async created() {
     await this.loadUserData(); // Lade Benutzerdaten zuerst
-    await this.loadCoupons(); // Lade Coupons
+  },
+
+  watch: {
+    user: {
+      handler() {
+        this.loadCoupons(); // Lade Coupons, wenn Benutzerdaten geladen sind
+      },
+      deep: true
+    }
   }
 };
+
 </script>
 
 <style>

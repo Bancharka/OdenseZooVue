@@ -4,6 +4,7 @@
  body {
   background-color: #E3EDCF;
   margin: 20px;
+  margin-bottom: 100px;
 }
 
 .login {
@@ -53,10 +54,16 @@ p {
 
 .pointh1 {
   margin-bottom: -20px;
+  color: white;
 }
 
 #h1point {
   margin-bottom: -20px;
+  color: white;
+}
+
+.textwhite {
+  color: white;
 }
 
 
@@ -146,13 +153,11 @@ footer {
 }
 
 .botnavcards {
-  background-color: #E3EDCF;
+  
   width: auto;
   height: 50px;
   padding: 0 10px;
   display: flex;
-  
-  border-radius: 10px;
   text-decoration: none;
 
 }
@@ -160,4 +165,24 @@ footer {
 
 .botnavpic {
   height: 20px;
+  display: flex;
+
+}
+
+.botnavalign {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  line-height: initial;
+}
+
+#botnavactive {
+  background-color: #e3edcf7c;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.botnavcolor {
+  color: black;
 }
