@@ -1,17 +1,27 @@
 <template>
-  <div>
-        <div class="pointbox">
-            <div>
-                <p>image here</p>
-            </div>
-            <h1> Point</h1>
+    <div>
+        
+        <div class="pointpoint" >
+            <div class="pointh1"><h1>navn</h1></div>
+            <div class="pointsection">
+                <div>
+                    <p><img src="/public/img/roedpanda.png" alt=""></p>
+                </div>
+                
+                
+                <div class="pointbox">
+                    <div v-if="points > 0">
+                        <div><h2> {{ points }}</h2></div>
+                        <h3>Point</h3> <!-- Zeige die Punkte des aktuellen Benutzers an -->
+                        
+                    </div>
 
-            <div v-if="points > 0">
-                <h2>Point: {{ points }}</h2> <!-- Zeige die Punkte des aktuellen Benutzers an -->
-            </div>
+                    
 
-            <div v-else>
-                <p>Du har 0 point</p>
+                    <div v-else>
+                        <p>Du har 0 point</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

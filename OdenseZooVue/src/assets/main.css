@@ -15,27 +15,55 @@
 
 
 h1 {
-  color: black;
+  font-family: montyblack;
+  font-size: 65px;
 }
 
 h2 {
-  color:black;
+  font-family: montybold;
+  font-size: 45px;    
 }
+
+h3 {
+  font-family: montyreg;
+  font-size: 30px;
+}
+
+h4 {
+  font-family: montyreg;
+  font-size: 20px;
+}
+
 
 p {
-  color: black;
+  font-family: montyreg;
+
 }
 
 
 
-
-
-
-
-.pointbox {
+.pointpoint {
   background-color: grey;
   display: flex;
-  align-items: center;
+  text-align: center;
+  flex-direction: column;
+
+}
+
+.pointh1 {
+  margin-bottom: -20px;
+}
+
+
+.pointsection {
   
-  height: 180px;
+  display: flex;
+  align-items: center;
+  height: 140px;
+  justify-content: space-around;
+}
+
+.pointbox {
+  display: flex;
+  flex-direction: column;
 }
