@@ -120,15 +120,6 @@ export default {
 </script>
 
 <style>
-/* Füge hier deine Stile hinzu, wenn nötig */
-.coupon {
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  padding: 10px;
-  border-radius: 5px;
-}
-.coupon img {
-  max-width: 100%;
-  height: auto;
-}
+
+
 </style>

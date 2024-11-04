@@ -2,7 +2,7 @@
     <div>
         
         <div class="pointpoint" >
-            <div class="pointh1"><h1>navn</h1></div>
+            <div class="pointh1"><h2>navn</h2></div>
             <div class="pointsection">
                 <div>
                     <p><img src="/public/img/roedpanda.png" alt=""></p>
@@ -11,7 +11,7 @@
                 
                 <div class="pointbox">
                     <div v-if="points > 0">
-                        <div><h2> {{ points }}</h2></div>
+                        <div><h1> {{ points }}</h1></div>
                         <h3>Point</h3> <!-- Zeige die Punkte des aktuellen Benutzers an -->
                         
                     </div>
@@ -19,7 +19,7 @@
                     
 
                     <div v-else>
-                        <p>Du har 0 point</p>
+                        <h3>Du har 0 point</h3>
                     </div>
                 </div>
             </div>
