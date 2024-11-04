@@ -85,3 +85,79 @@ p {
   max-width: 100%;
   height: auto;
 }
+
+#topnav {
+  display: flex;
+  justify-content: center;
+  justify-content: space-evenly;
+margin-bottom: 20px;
+}
+
+#navfordele {
+  background-color: #ABD18F;
+  width: 170px;
+  height: auto;
+  color: #EDF0E8;
+  text-align: center;
+  text-decoration: none;
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+}
+
+#navvilde {
+  background-color: #457443;
+  width: 170px;
+  height: 50px;
+  color: #EDF0E8;
+  text-align: center;
+  text-decoration: none;
+  font-size: 25px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+}
+
+
+
+footer {
+  display: flex;
+  background-color: #ABD18F;
+  position:fixed;
+  bottom: 0;
+  width: 100%;
+  margin-left: -20px;
+  
+
+}
+
+#botnav {
+  display: flex;
+  height: 70px;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+  
+  
+}
+
+.botnavcards {
+  background-color: #E3EDCF;
+  width: auto;
+  height: 50px;
+  padding: 0 10px;
+  display: flex;
+  
+  border-radius: 10px;
+  text-decoration: none;
+
+}
+
+
+.botnavpic {
+  height: 20px;
+}
