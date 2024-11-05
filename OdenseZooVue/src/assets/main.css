@@ -73,27 +73,27 @@ p {
 
 
 .pointpoint {
-  background-color: #007836;
+  background-color: #abd18fa3;
   display: flex;
   text-align: center;
   flex-direction: column;
-  border-radius: 4px;
+  border-radius: 10px;
 
 }
 
 .pointh1 {
   margin-bottom: -20px;
-  color: white;
+  color: black;
   margin-top: 10px;
 }
 
 #h1point {
   margin-bottom: -20px;
-  color: white;
+  color: black;
 }
 
 .textwhite {
-  color: white;
+  color: black;
 }
 
 
@@ -180,7 +180,7 @@ footer {
   justify-content: space-evenly;
   align-items: center;
   font-family: montylight;
-  z-index: 10+;
+  z-index: 10;
 }
 
 .botnavcards {
