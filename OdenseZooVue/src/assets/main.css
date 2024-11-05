@@ -69,6 +69,8 @@ p {
 }
 
 
+/* Her begynder Vilde Venner styling */
+
 
 .pointpoint {
   background-color: #007836;
@@ -109,8 +111,6 @@ p {
 }
 
 
-
-
 .coupon {
   margin-top: 40px;
   margin-bottom: 20px;
@@ -120,6 +120,9 @@ p {
   max-width: 100%;
   height: auto;
 }
+
+
+/* Her begynder topnav styling */
 
 #topnav {
   display: flex;
@@ -159,7 +162,7 @@ margin-bottom: 20px;
   font-family: montyreg;
 }
 
-
+/* Her begynder  footer styling */
 
 footer {
   display: flex;
@@ -221,8 +224,6 @@ footer {
 
 /* Her styles login side */
 
-/* Her slutter stylingen */
-
 .loginsection {
   display: flex;
   flex-direction: column;
@@ -245,6 +246,7 @@ footer {
   width: 250px;
   font-size: 20px;
   border-style: none;
+  border-radius: 2px;
 }
 
 .loginbutton {
@@ -256,4 +258,5 @@ footer {
   font-family: montyreg;
   border-style: none;
   margin-top: 10px;
+  font-size: 20px;
 }
