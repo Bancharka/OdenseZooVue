@@ -24,21 +24,21 @@
     "coupon_id_4": {
       "name": "50% rabat filterkaffe",
       "points": 0,
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/odensezooapp.appspot.com/o/kupon%20%C3%A6gg%20kaffe.png?alt=media&token=77c09689-5c8b-4ccf-aeb5-ace5b3faf47a",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/odensezooapp.appspot.com/o/kupon%20%C3%A6gg%20kaffe.png?alt=media&token=54153d82-d247-444f-9595-8829b2bd4d00",
       "description": "Få 50% rabat på filterkaffe",
       "valid_until": "2024-12-31"
     },
     "coupon_id_5": {
       "name": "gratis kaffe",
       "points": 0,
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/odensezooapp.appspot.com/o/kupon%20%C3%A6gg%20gratis%20kaffe.png?alt=media&token=9d8fd331-dece-4232-bbca-1b0dadf7293a",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/odensezooapp.appspot.com/o/kupon%20%C3%A6gg%20gratis%20kaffe.png?alt=media&token=82b2c232-1135-456e-9be1-4f0be65a69f0",
       "description": "Få 1 gratis filterkaffe",
       "valid_until": "2024-12-31"
     },
     "coupon_id_6": {
       "name": "gratis is",
       "points": 0,
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/odensezooapp.appspot.com/o/kupon%20%C3%A6gg%20is_2.png?alt=media&token=54706ec3-cfd6-48ee-9192-2af788baec93",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/odensezooapp.appspot.com/o/kupon%20%C3%A6gg%20is.png?alt=media&token=3ff62700-aee0-4812-a08a-8ea3df8b0f88",
       "description": "Få 1 gratis valgfri is",
       "valid_until": "2024-12-31"
     }

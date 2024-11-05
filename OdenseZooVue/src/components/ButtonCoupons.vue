@@ -1,37 +1,42 @@
 <template>
   <div>
-    <button @click="addRandomCoupon" class="add-coupon-button">Tilføj tilfældig kupon til konto</button>
+    <button @click="addNextAvailableCoupon" class="add-coupon-button">Tilføj næste tilgængelige kupon til konto</button>
   </div>
 </template>
 
 <script>
-import { ref, update } from "firebase/database"; // Importér ref og update fra Firebase Database
-import { database } from "@/firebase"; // Importér Firebase-konfigurationen
-import { getAuth } from "firebase/auth"; // Importér Firebase Auth til brugerlogin
+import { ref, get, update } from "firebase/database"; // Importer ref, get og update fra Firebase Database
+import { database } from "@/firebase"; // Importer Firebase-konfigurationen
+import { getAuth } from "firebase/auth"; // Importer Firebase Auth til bruger-login
 
 export default {
   data() {
     return {
       userId: null, // ID for den loggede bruger
-      availableCouponIds: ["coupon_id_4", "coupon_id_5", "coupon_id_6"] // Mulige kuponer, der kan tilføjes
+      couponOrder: ["coupon_id_4", "coupon_id_5", "coupon_id_6"] // Bestem rækkefølge for kuponer
     };
   },
   methods: {
-    // Metode til at tilføje en tilfældig kupon til brugerens konto
-    async addRandomCoupon() {
+    async addNextAvailableCoupon() {
       if (this.userId) {
-        // Vælg en tilfældig kupon-ID fra listen over tilgængelige kuponer
-        const randomCouponId = this.availableCouponIds[Math.floor(Math.random() * this.availableCouponIds.length)];
-
-        // Reference til brugerens kuponer i databasen
         const userCouponsRef = ref(database, `users/${this.userId}/available_coupons`);
+        
+        // Hent brugerens nuværende kuponstatus fra databasen
+        const snapshot = await get(userCouponsRef);
+        const userCoupons = snapshot.exists() ? snapshot.val() : {};
 
-        // Opdater Firebase ved at sætte den valgte kupon til true
-        await update(userCouponsRef, {
-          [randomCouponId]: true // Aktivér den tilfældige kupon
-        });
+        // Find den første kupon i rækkefølgen, som endnu ikke er sat til true
+        const nextCouponId = this.couponOrder.find(couponId => !userCoupons[couponId]);
 
-        alert(`Kupon ${randomCouponId} blev tilføjet til din konto!`);
+        if (nextCouponId) {
+          // Sæt den næste tilgængelige kupon til true
+          await update(userCouponsRef, {
+            [nextCouponId]: true
+          });
+          alert(`Kupon ${nextCouponId} blev tilføjet til din konto!`);
+        } else {
+          alert("Du har allerede alle tilgængelige kuponer.");
+        }
       } else {
         alert("Bruger er ikke logget ind.");
       }
