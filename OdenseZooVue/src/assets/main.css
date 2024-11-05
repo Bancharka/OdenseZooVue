@@ -214,3 +214,46 @@ footer {
 .botnavcolor {
   color: black;
 }
+
+
+
+
+
+/* Her styles login side */
+
+/* Her slutter stylingen */
+
+.loginsection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap:10px;
+  width: 100%;
+  height: 70vh;
+
+}
+
+.loginpage {
+  width: 100%;
+}
+
+.logininput {
+  display: flex;
+  height: 50px;
+  font-family: montyreg;
+  width: 250px;
+  font-size: 20px;
+  border-style: none;
+}
+
+.loginbutton {
+  background-color: #457443;
+  height: 50px;
+  width: 260px;
+  border-radius: 50px;
+  color: white;
+  font-family: montyreg;
+  border-style: none;
+  margin-top: 10px;
+}

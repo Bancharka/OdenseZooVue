@@ -6,9 +6,8 @@ import { RouterView } from 'vue-router';
 
   <header>
     <nav id="topnav">
-      <router-link id="navfordele" to="/goodies">Fordele</router-link> 
-      <router-link id="navvilde" to="/dashboard"> Vilde Venner </router-link> 
-
+      <router-link v-if="$route.name !== 'login'" id="navfordele" to="/goodies">Fordele</router-link> 
+      <router-link v-if="$route.name !== 'login'" id="navvilde" to="/dashboard"> Vilde Venner </router-link> 
     </nav>
   </header>
 
