@@ -13,7 +13,7 @@
                   </div>
                   <div v-else>
                       <h3 class="textwhite">Du har 0 point</h3>
-                      <button @click="showModalMessage('Du har 0 point.');">Se besked</button>
+                      
                   </div>
               </div>
           </div>

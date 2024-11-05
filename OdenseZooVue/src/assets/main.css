@@ -78,17 +78,14 @@ p {
   text-align: center;
   flex-direction: column;
   border-radius: 10px;
-
 }
 
 .pointh1 {
-  margin-bottom: -20px;
   color: black;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 #h1point {
-  margin-bottom: -20px;
   color: black;
 }
 
