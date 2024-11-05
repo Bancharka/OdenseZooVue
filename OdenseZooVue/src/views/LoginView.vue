@@ -21,7 +21,7 @@ const register = () => {
 </script>
 
 <template>
-    <h1>Lav konto</h1>
+    <h1>Log ind</h1>
     <p><input type="text" placeholder="Email" v-model="email"/></p>
     <p><input type="password" placeholder="Password" v-model="password"/></p>
     <p><button @click="register">Log ind</button></p>

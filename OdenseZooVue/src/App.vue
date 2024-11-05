@@ -29,7 +29,7 @@ import { RouterView } from 'vue-router';
                 </div> 
             </router-link> 
 
-            <router-link class="botnavcards" to=""> 
+            <router-link class="botnavcards" to="/aarskort"> 
                 <div class="botnavalign">
 
                     <div >

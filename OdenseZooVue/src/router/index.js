@@ -4,6 +4,7 @@ import DashBoardView from '@/views/DashboardView.vue';
 import EggView from '@/views/EggView.vue';
 import GoodiesView from '../views/GoodiesView.vue';
 import RegisterView from '../views/RegisterView.vue';
+import AnnualPassView from '../views/AnnualPassView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +39,12 @@ const router = createRouter({
       
       component: () => import('../views/RegisterView.vue')
       },
+      {
+        path: '/aarskort',
+        name: 'aarskort',
+        
+        component: () => import('../views/AnnualPassView.vue')
+        }
   ]
 })
 
