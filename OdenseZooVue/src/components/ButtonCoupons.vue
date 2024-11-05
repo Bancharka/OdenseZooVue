@@ -99,9 +99,7 @@ export default {
   padding-top: 20px;
 }
 
-.add-coupon-image:hover {
-  opacity: 0.8; /* Lille effekt, når man hover over billedet */
-}
+
 
 .modal {
   display: flex;

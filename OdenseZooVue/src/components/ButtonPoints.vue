@@ -50,6 +50,11 @@ export default {
       console.log("addPoints afsluttet. modalMessage:", this.modalMessage, "showModal:", this.showModal);
     },
 
+    closeModal() {
+      this.showModal = false; // Luk modal
+      console.log("Modal lukket."); // Log til konsol
+    },
+
     // Funktion til at hente den nuværende bruger og sætte et realtids-listerner på points
     initializeUser() {
       const auth = getAuth();
@@ -72,7 +77,7 @@ export default {
         console.error("Ingen bruger er logget ind.");
       }
     }
-},
+  },
 
   created() {
     this.initializeUser(); // Initialiser brugerdata, når komponenten oprettes
@@ -85,10 +90,6 @@ export default {
   cursor: pointer;
   border: none;
   max-width: 100%;
-}
-
-.scan-image:hover {
-  opacity: 0.8; /* Lille effekt, når man hover over billedet */
 }
 
 .modal {

@@ -14,23 +14,33 @@
     <div v-else>
       <p>Ingen kuponer tilgængelige.</p>
     </div>
+
+    <!-- Modal til at vise beskeder -->
+    <div v-if="showModal" class="modal">
+      <div class="modal-content">
+        <span class="close" @click="closeModal">&times;</span>
+        <p>{{ modalMessage }}</p>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { database } from "@/firebase"; // Pfad anpassen, wenn nötig
-import { ref, get, update, onValue } from "firebase/database"; // Importiere ref, get, update und onValue
-import { getAuth } from "firebase/auth"; // Importiere Firebase Auth
+import { database } from "@/firebase"; 
+import { ref, get, update, onValue } from "firebase/database"; 
+import { getAuth } from "firebase/auth"; 
 
 export default {
   data() {
     return {
-      availableCoupons: [], // Array für alle verfügbaren Coupons
+      availableCoupons: [],
       user: {
         available_coupons: {},
         points: 0
       },
-      userId: null
+      userId: null,
+      modalMessage: "", // Til modalbesked
+      showModal: false // Til at vise modal
     };
   },
 
@@ -42,23 +52,14 @@ export default {
 
         if (snapshot.exists()) {
           const allCoupons = snapshot.val();
-          console.log("Alle Coupons:", allCoupons);
-
-          // Filtere alle verfügbaren Coupons für den Benutzer
           this.availableCoupons = Object.entries(allCoupons).filter(([id, coupon]) => {
-            return this.user.available_coupons[id]; // Coupon ist verfügbar
-          }).map(([id, coupon]) => ({ id, ...coupon })); // Coupon-Daten formatieren
-
-          if (this.availableCoupons.length > 0) {
-            console.log("Verfügbare Coupons:", this.availableCoupons);
-          } else {
-            console.log("Keine verfügbaren Coupons gefunden.");
-          }
+            return this.user.available_coupons[id];
+          }).map(([id, coupon]) => ({ id, ...coupon }));
         } else {
-          console.error("Keine Coupons in der Datenbank gefunden.");
+          console.error("Ingen coupons fundet.");
         }
       } catch (error) {
-        console.error("Fehler beim Laden der Coupons:", error);
+        console.error("Fejl ved indlæsning af coupons:", error);
       }
     },
 
@@ -68,67 +69,103 @@ export default {
         const user = auth.currentUser;
 
         if (user) {
-          this.userId = user.uid; // Setze die Benutzer-ID
+          this.userId = user.uid; 
           const userRef = ref(database, `users/${this.userId}`);
-
-          // Setze den onValue Listener für die Benutzerpunkte
           onValue(userRef, (snapshot) => {
             if (snapshot.exists()) {
               this.user = snapshot.val() || { available_coupons: {} };
-              console.log("Benutzerdaten geladen:", this.user);
-              console.log("Verfügbare Coupons:", this.user.available_coupons);
             } else {
-              console.error("Benutzerdaten nicht gefunden.");
+              console.error("Brugerdata ikke fundet.");
             }
           });
         } else {
-          console.error("Kein Benutzer angemeldet.");
+          console.error("Ingen bruger logget ind.");
         }
       } catch (error) {
-        console.error("Fehler beim Laden der Benutzerdaten:", error);
+        console.error("Fejl ved indlæsning af brugerdata:", error);
       }
     },
 
     async redeemCoupon(couponId, couponPoints) {
       if (this.user.points >= couponPoints) {
-        // Punkte abziehen
         this.user.points -= couponPoints; 
-        // Coupon als eingelöst markieren
         this.user.available_coupons[couponId] = false; 
 
-        // Update Firebase-Datenbank
         await update(ref(database, `users/${this.userId}`), {
           points: this.user.points,
           available_coupons: this.user.available_coupons
         });
-        
-        // Filtere die Coupons, um den eingelösten Coupon zu entfernen
+
         this.availableCoupons = this.availableCoupons.filter(coupon => coupon.id !== couponId);
 
-        alert("Tillykke! Du har indløst din kupon!");
+        // Vis besked i modal i stedet for alert
+        this.modalMessage = "Tillykke! Du har indløst din kupon!";
+        this.showModal = true; // Åbner modal
       } else {
-        alert("Ikke nok point til at bruge kupon.");
+        // Vis besked i modal i stedet for alert
+        this.modalMessage = "Ikke nok point til at bruge kupon.";
+        this.showModal = true; // Åbner modal
       }
+    },
+
+    closeModal() {
+      this.showModal = false; // Luk modal
     }
   },
 
   async created() {
-    await this.loadUserData(); // Lade Benutzerdaten zuerst
+    await this.loadUserData(); // Indlæs brugerdata
   },
 
   watch: {
     user: {
       handler() {
-        this.loadCoupons(); // Lade Coupons, wenn Benutzerdaten geladen sind
+        this.loadCoupons(); // Indlæs coupons, når brugerdata er indlæst
       },
       deep: true
     }
   }
 };
-
 </script>
 
 <style>
+/* Stilarter for modalen (kan være de samme som i Points.vue) */
+.modal {
+  display: flex;
+  justify-content: center; /* Centrerer indholdet horisontalt */
+  align-items: center; /* Centrerer indholdet vertikalt */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%; /* Sæt højden til 100% for at dække hele skærmen */
+  overflow: auto; /* Tilføjer scroll hvis nødvendigt */
+  background-color: rgb(0, 0, 0);
+  background-color: hsl(147, 100%, 24%, 0.4);
+}
 
+.modal-content {
+  background-color: #fefefe;
+  padding: 20px;
+  border: none;
+  width: 80%; /* Kan ændres til hvad der passer */
+  max-width: 500px; /* Sæt en maksimal bredde for modalen */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Tilføj skygge for dybde */
+  border-radius: 8px; /* Rund hjørner for et blødere udseende */
+}
 
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
 </style>
