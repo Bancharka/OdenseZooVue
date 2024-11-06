@@ -21,8 +21,13 @@ const register = () => {
 </script>
 
 <template>
-    <h1>Lav konto</h1>
-    <p><input type="text" placeholder="Email" v-model="email"/></p>
-    <p><input type="password" placeholder="Password" v-model="password"/></p>
-    <p><button @click="register">Registrer</button></p>
+    <div class="loginpage">
+        <div class= "loginsection">
+            <h1>Opret bruger</h1>
+            <p><input class="logininput" type="text" placeholder="Email" v-model="email"/></p>
+            <p><input class="logininput" type="password" placeholder="Password" v-model="password"/></p>
+            <p><button class="loginbutton" @click="register">Opret bruger</button></p>
+            <router-link id="registerbutton" class ="loginbutton" to="/"> <p>Login</p> </router-link>
+        </div>
+    </div>
 </template>

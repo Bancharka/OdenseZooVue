@@ -231,7 +231,7 @@ footer {
   gap:10px;
   width: 100%;
   height: 70vh;
-
+  text-align: center;
 }
 
 .loginpage {
@@ -260,9 +260,12 @@ footer {
   font-size: 20px;
 }
 
-
-
-
+#registerbutton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
 
 .imggiraffe {
   position:relative;
