@@ -1,21 +1,39 @@
 <template>
   <div>
-    <div v-if="availableCoupons.length > 0">
-      <div v-for="coupon in availableCoupons" :key="coupon.id" class="coupon">
+    <!-- Other coupons (1, 2, 3) -->
+    <div v-if="regularCoupons.length > 0">
+      <p class="couponheadline">Månedskuponer</p>
+      <div v-for="coupon in regularCoupons" :key="coupon.id" class="coupon">
         <img 
           v-if="coupon.imageUrl" 
-          v-bind:src="coupon.imageUrl" 
+          :src="coupon.imageUrl" 
           alt="Billede af kupon" 
           @click="redeemCoupon(coupon.id, coupon.points)" 
           style="cursor: pointer;" 
         />
       </div>
     </div>
-    <div v-else>
+
+    <!-- Egg coupons section with headline -->
+    <div v-if="eggCoupons.length > 0">
+      <p class="couponheadline">Æg-kuponer</p>
+      <div v-for="coupon in eggCoupons" :key="coupon.id" class="coupon">
+        <img 
+          v-if="coupon.imageUrl" 
+          :src="coupon.imageUrl" 
+          alt="Billede af kupon" 
+          @click="redeemCoupon(coupon.id, coupon.points)" 
+          style="cursor: pointer;" 
+        />
+      </div>
+    </div>
+
+    <!-- Message when no coupons are available -->
+    <div v-if="availableCoupons.length === 0">
       <p class="nocouponsavailable">Ingen kuponer tilgængelige.</p>
     </div>
 
-    <!-- Modal til at vise beskeder -->
+    <!-- Modal for messages -->
     <div v-if="showModal" class="modal">
       <div class="modal-content">
         <span class="close" @click="closeModal">&times;</span>
@@ -26,9 +44,9 @@
 </template>
 
 <script>
-import { database } from "@/firebase"; 
-import { ref, get, update, onValue } from "firebase/database"; 
-import { getAuth } from "firebase/auth"; 
+import { database } from "@/firebase";
+import { ref, get, update, onValue } from "firebase/database";
+import { getAuth } from "firebase/auth";
 
 export default {
   data() {
@@ -39,9 +57,24 @@ export default {
         points: 0
       },
       userId: null,
-      modalMessage: "", // Til modalbesked
-      showModal: false // Til at vise modal
+      modalMessage: "",
+      showModal: false
     };
+  },
+
+  computed: {
+    // Separate egg coupons (IDs 4, 5, 6) and other coupons
+    eggCoupons() {
+      return this.availableCoupons.filter(coupon =>
+        ["coupon_id_4", "coupon_id_5", "coupon_id_6"].includes(coupon.id)
+      );
+    },
+
+    regularCoupons() {
+      return this.availableCoupons.filter(coupon =>
+        !["coupon_id_4", "coupon_id_5", "coupon_id_6"].includes(coupon.id)
+      );
+    }
   },
 
   methods: {
@@ -52,9 +85,9 @@ export default {
 
         if (snapshot.exists()) {
           const allCoupons = snapshot.val();
-          this.availableCoupons = Object.entries(allCoupons).filter(([id, coupon]) => {
-            return this.user.available_coupons[id];
-          }).map(([id, coupon]) => ({ id, ...coupon }));
+          this.availableCoupons = Object.entries(allCoupons)
+            .filter(([id]) => this.user.available_coupons[id])
+            .map(([id, coupon]) => ({ id, ...coupon }));
         } else {
           console.error("Ingen coupons fundet.");
         }
@@ -69,7 +102,7 @@ export default {
         const user = auth.currentUser;
 
         if (user) {
-          this.userId = user.uid; 
+          this.userId = user.uid;
           const userRef = ref(database, `users/${this.userId}`);
           onValue(userRef, (snapshot) => {
             if (snapshot.exists()) {
@@ -88,8 +121,8 @@ export default {
 
     async redeemCoupon(couponId, couponPoints) {
       if (this.user.points >= couponPoints) {
-        this.user.points -= couponPoints; 
-        this.user.available_coupons[couponId] = false; 
+        this.user.points -= couponPoints;
+        this.user.available_coupons[couponId] = false;
 
         await update(ref(database, `users/${this.userId}`), {
           points: this.user.points,
@@ -98,35 +131,35 @@ export default {
 
         this.availableCoupons = this.availableCoupons.filter(coupon => coupon.id !== couponId);
 
-        // Vis besked i modal i stedet for alert
+        // Show message in modal instead of alert
         this.modalMessage = "Tillykke! Du har indløst din kupon!";
-        this.showModal = true; // Åbner modal
+        this.showModal = true;
       } else {
-        // Vis besked i modal i stedet for alert
         this.modalMessage = "Ikke nok point til at bruge kupon.";
-        this.showModal = true; // Åbner modal
+        this.showModal = true;
       }
     },
 
     closeModal() {
-      this.showModal = false; // Luk modal
+      this.showModal = false;
     }
   },
 
   async created() {
-    await this.loadUserData(); // Indlæs brugerdata
+    await this.loadUserData();
   },
 
   watch: {
     user: {
       handler() {
-        this.loadCoupons(); // Indlæs coupons, når brugerdata er indlæst
+        this.loadCoupons();
       },
       deep: true
     }
   }
 };
 </script>
+
 
 <style>
 /* Stilarter for modalen (kan være de samme som i Points.vue) */
@@ -170,6 +203,14 @@ export default {
 }
 
 .nocouponsavailable {
-  margin-top: 20px;
+  margin-top: 40px;
+  font-size: 30px;
+  font-family: montybold;
+}
+
+.couponheadline {
+  margin-top: 30px;
+  font-size: 30px;
+  font-family: montybold;
 }
 </style>
