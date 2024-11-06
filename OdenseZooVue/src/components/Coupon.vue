@@ -12,7 +12,7 @@
       </div>
     </div>
     <div v-else>
-      <p>Ingen kuponer tilgængelige.</p>
+      <p class="nocouponsavailable">Ingen kuponer tilgængelige.</p>
     </div>
 
     <!-- Modal til at vise beskeder -->
@@ -167,5 +167,9 @@ export default {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+.nocouponsavailable {
+  margin-top: 20px;
 }
 </style>
