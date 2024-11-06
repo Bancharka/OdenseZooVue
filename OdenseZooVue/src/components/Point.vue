@@ -9,7 +9,7 @@
               <div class="pointbox">
                   <div v-if="points > 0">
                       <div id="h1point"><h1>{{ points }}</h1></div>
-                      <h3 class="textwhite">Point</h3> <!-- Zeige die Punkte des aktuellen Benutzers an -->
+                      <h3 class="textwhite">Point</h3>
                   </div>
                   <div v-else>
                       <h3 class="textwhite">Du har 0 point</h3>
@@ -19,7 +19,6 @@
           </div>
       </div>
 
-      <!-- Modal til at vise beskeder -->
       <div v-if="showModal" class="modal">
           <div class="modal-content">
               <span class="close" @click="closeModal">&times;</span>
@@ -31,15 +30,14 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { auth, database } from '../firebase'; // Import Firebase configuration
+import { auth, database } from '../firebase';
 import { ref as dbRef, onValue } from 'firebase/database';
 
 const points = ref(0);
 const userId = ref(null);
-const userName = ref(''); // Add a ref for the user's name
-const showModal = ref(false); // For at styre modalens synlighed
-const modalMessage = ref(''); // Beskeden der skal vises i modal
-
+const userName = ref(''); 
+const showModal = ref(false); 
+const modalMessage = ref('');
 const loadUserData = () => {
   auth.onAuthStateChanged(user => {
       if (user) {
@@ -50,7 +48,7 @@ const loadUserData = () => {
               if (snapshot.exists()) {
                   const userData = snapshot.val();
                   points.value = userData.points;
-                  userName.value = userData.name; // Set the user's name
+                  userName.value = userData.name;
               } else {
                   console.error("User not found");
               }
@@ -62,12 +60,12 @@ const loadUserData = () => {
 };
 
 const showModalMessage = (message) => {
-  modalMessage.value = message; // Set the modal message
-  showModal.value = true; // Show modal
+  modalMessage.value = message; 
+  showModal.value = true;
 };
 
 const closeModal = () => {
-  showModal.value = false; // Close modal
+  showModal.value = false;
 };
 
 onMounted(() => {

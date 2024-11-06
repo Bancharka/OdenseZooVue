@@ -7,7 +7,4 @@ import ButtonCoupons from '@/components/ButtonCoupons.vue';
 <template>
 <ButtonPoints />
 <ButtonCoupons />
-
-
-
 </template>
