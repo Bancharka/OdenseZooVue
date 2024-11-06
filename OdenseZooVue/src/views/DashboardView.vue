@@ -18,4 +18,5 @@ onAuthStateChanged(auth, (user) => {
 <template>
     <Points :userId="userId" /> <!-- Übergib die userId als Prop -->
     <Coupons />
+    <img class="imggiraffe" src="/src/img/giraf.png" alt="drawing of a giraffe">
 </template>

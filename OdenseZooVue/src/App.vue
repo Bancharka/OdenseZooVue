@@ -15,7 +15,7 @@ import { RouterView } from 'vue-router';
 
     <footer>
         <nav id="botnav">
-            <router-link class="botnavcards" to="">
+            <router-link v-if="$route.name !== 'login'" class="botnavcards" to="">
                 <div class="botnavalign">
 
                 <div >
@@ -28,7 +28,7 @@ import { RouterView } from 'vue-router';
                 </div> 
             </router-link> 
 
-            <router-link class="botnavcards" to="/aarskort"> 
+            <router-link v-if="$route.name !== 'login'" class="botnavcards" to="/aarskort"> 
                 <div class="botnavalign">
 
                     <div >
@@ -41,7 +41,7 @@ import { RouterView } from 'vue-router';
                 </div> 
             </router-link> 
 
-            <router-link class="botnavcards" to=""> 
+            <router-link v-if="$route.name !== 'login'" class="botnavcards" to=""> 
                 <div class="botnavalign">
 
                     <div >
@@ -54,7 +54,7 @@ import { RouterView } from 'vue-router';
                 </div> 
             </router-link> 
         
-            <router-link class="botnavcards" to="/dashboard">
+            <router-link v-if="$route.name !== 'login'" class="botnavcards" to="/dashboard">
                 <div id="botnavactive"class="botnavalign">
 
                     <div >
