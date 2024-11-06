@@ -28,6 +28,7 @@ const register = () => {
             <p><input class="logininput" type="text" placeholder="Email" v-model="email"/></p>
             <p><input class="logininput" type="password" placeholder="Password" v-model="password"/></p>
             <p><button class="loginbutton" @click="register">Log ind</button></p>
+            <p><button class="registerbutton" @click="register">Opret bruger</button></p>
         </div>
     </div>
 </template>
