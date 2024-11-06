@@ -2,7 +2,7 @@
 import { ref } from "vue"; 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "vue-router";
-import { app } from '../firebase'; // Adjust the path as necessary
+import { app } from '../firebase';
 
 const email = ref("");
 const password = ref("");

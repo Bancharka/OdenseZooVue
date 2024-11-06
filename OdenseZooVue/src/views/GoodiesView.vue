@@ -3,5 +3,6 @@
 </script>
 
 <template>
-<h1>Goddav</h1>
+
+<h1>Fordele</h1>
 </template>
