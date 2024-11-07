@@ -6,6 +6,7 @@ import { RouterView } from 'vue-router';
 
   <header>
     <nav id="topnav">
+        <!-- v-if vil sige at hvis IKKE siden du er på er 'login' eller 'register', så skal den vise Fordele og Vilde Venner linksene -->
       <router-link v-if="$route.name !== 'login' && $route.name !== 'register'" id="navfordele" to="/goodies">Fordele</router-link> 
       <router-link v-if="$route.name !== 'login' && $route.name !== 'register'" id="navvilde" to="/dashboard"> Vilde Venner </router-link> 
     </nav>
