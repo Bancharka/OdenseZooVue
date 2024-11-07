@@ -24,6 +24,8 @@
 </template>
 
 <script setup>
+
+// IMPORT
 // Importerer ref (reaktive data) og onMounted (kalde funktioner ved når komponenten er klar og synligt til brugeren) fra Vue
 import { ref, onMounted } from 'vue';
 
@@ -33,6 +35,10 @@ import { auth, database } from '../firebase';
 // Importerer dbRef (databasereference, ændrer navnet ref til dbRef i min kode, forhindrer navnekonflikter) og onValue (lytter til ændringer i databasen ved den specifikke reference, henter straks den nye værdi og kalder en funktion, som opdaterer data i realtime) fra firebase database
 import { ref as dbRef, onValue } from 'firebase/database';
 
+
+
+
+// VARIABLER
 // reaktiv variabel til brugerens points, starter på 0
 const points = ref(0);
 
@@ -42,7 +48,9 @@ const userId = ref(null);
 // reaktiv variabel for brugerens navn, henter fra databasen
 const userName = ref('');
 
-// arrow function, henter data for den aktuelle bruger og opdaterer brugerens navn og point
+
+//FUNCTION
+// henter data for den aktuelle bruger og opdaterer brugerens navn og point
 const loadUserData = () => {
     // overvåger brugerens login-status
     auth.onAuthStateChanged(user => {
@@ -54,7 +62,7 @@ const loadUserData = () => {
             // userRef bliver direkte link til data fra en specifikke user i databasen, dbRef siger specifikt, hvor i databasen vi skal lede efter
             const userRef = dbRef(database, 'users/' + userId.value);
   
-            // lytter på ændringer i userRef og opdaterer points og userName i realtime, snapshot: repræsentation af de aktuelle data på et bestemt tidspunkt fra en given placering i databasen
+            // svarer til GET API kald - lytter på ændringer i userRef og opdaterer points og userName i realtime, snapshot: repræsentation af de aktuelle data på et bestemt tidspunkt fra en given placering i databasen, snapshot bliver sendt med aktuelle værdi
             onValue(userRef, snapshot => {
                 // Hvis der er data i databasen på dette referencepunkt:
                 if (snapshot.exists()) {
@@ -73,6 +81,7 @@ const loadUserData = () => {
         }
     });
 };
+
 
 // loadUserData bliver kørt, når komponenten er færdig med at indlæse
 onMounted(() => {
