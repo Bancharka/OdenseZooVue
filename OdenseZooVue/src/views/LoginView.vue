@@ -7,6 +7,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "vue-router";
 import { app } from '../firebase';
 
+// Her oprettes der reaktiver variabler, email og password. Jeg tror i praksis at det betyder at den hele tiden "lytter" på ændringer i email og password.
 const email = ref("");
 const password = ref("");
 const router = useRouter();
