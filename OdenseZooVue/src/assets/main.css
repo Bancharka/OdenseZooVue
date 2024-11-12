@@ -276,11 +276,10 @@ footer {
 
 /*Her styles ButtonCoupons*/
 
-.add-coupon-image {
-  cursor: pointer;
-  max-width: 100%; /* Gør billedet responsivt */
-  border: none; /* Ingen kant omkring billedet */
-  padding-top: 20px;
+.add-coupon-video {
+  width: 100%;
+  background-color: transparent;
+  display: block
 }
 
 .modal {
@@ -321,6 +320,7 @@ footer {
   text-decoration: none;
   cursor: pointer;
 }
+
 
 /*Her styles ButtonPoints*/
 
