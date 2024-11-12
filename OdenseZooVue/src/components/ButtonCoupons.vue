@@ -1,11 +1,9 @@
 <template>
   <div class="video-container">
-    <!-- Hintergrundbild, das immer sichtbar ist und hinter dem Video liegt -->
     <div class="video-background">
-      <img :src="backgroundImage" alt="Hintergrundbild" />
+      <img :src="backgroundImage" alt="Billede af kupon" />
     </div>
 
-    <!-- Video mit transparentem Hintergrund -->
     <video 
       ref="dinoVideo" 
       src="../assets/dino_egg_video.webm" 
