@@ -15,8 +15,22 @@
 
 
 <div class="fordelesection">
-    <h3>Et gratis besøg i (indsæt billeder af aalbord, givskud og ree park)</h3>
+    <h3>Et gratis besøg i</h3>
+    <div class="fordeleimg">
+        <img src="../img/logo/aalborg.png" alt="logo af aalborg zoo">
+        <img src="../img/logo/givskud.svg" alt="logo af givskud zoo">
+        <img src="../img/logo/ree.webp" alt="logo af ree park">
+    </div>
+</div>
+
+<div class="fordelesection">
     <h3>50% rabat på entré:</h3>
+    <div class="fordeleimg">
+        <img src="../img/logo/egeskov.png" alt="egeskov logo">
+        <img src="../img/logo/universe.png" alt="universe logo">
+        <img src="../img/logo/tivolifri.png" alt="tivoli friheden logo">
+        <img src="../img/logo/wow.svg" alt="">
+    </div>
     <h4>Hos udenlandske ZOO's: </h4>
     <p>
         <span style="font-weight: bold;"> Sverige:</span> Borås Djurspark <br>
@@ -27,6 +41,12 @@
 
 <div class="fordelesection">
     <h3>25%rabat på entré:</h3>
+    <div class="fordeleimg">
+        <img src="../img/logo/kbhzoo.png" alt="København zoo logo">
+        <img src="../img/logo/djurs.png" alt="Djurs sommerland logo">
+        <img src="../img/logo/faarup.svg" alt="Fårup sommerland logo">
+        <img src="../img/logo/randersregn.png" alt="Randers regnskov logo">
+    </div>
 </div>
 
 <div class="fordelesection">

@@ -1,4 +1,4 @@
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, menu, nav, output, section, summary, time, mark, audio, video {
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, menu, nav, output, section, summary, time, mark, audio {
   margin: 0;
   padding: 0;
   border: 0;
@@ -10,6 +10,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
 body {
   background-color: #E3EDCF;
+  background-image: linear-gradient(#ABD18F,#E3EDCF );
   margin: 20px;
   margin-bottom: 100px;
 }
@@ -131,7 +132,7 @@ p {
 }
 
 #navfordele {
-  background-color: #ABD18F;
+  background-color: #457443;
   width: 100%;
   height: auto;
   color: #EDF0E8;
@@ -180,6 +181,7 @@ footer {
   align-items: center;
   font-family: montylight;
   z-index: 10;
+  backface-visibility: hidden;
 }
 
 .botnavcards {
@@ -312,6 +314,7 @@ footer {
   width: 60%;
   height: auto;
   object-position: center;
+
 }
 
 
@@ -476,9 +479,9 @@ footer {
 }
 
 .fordelesection {
-  margin-bottom: 50px;
+  margin-bottom: 25px;
   border-bottom: 2px solid #457443;
-  padding-bottom: 30px;
+  padding-bottom: 25px;
 }
 
 .fordelesection h3 {
@@ -489,3 +492,19 @@ footer {
 .fordelesection h4 {
   margin-top: 5px;
 }
+
+.fordeleimg {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+}
+
+.fordeleimg img {
+  width: 180px;
+}
+
