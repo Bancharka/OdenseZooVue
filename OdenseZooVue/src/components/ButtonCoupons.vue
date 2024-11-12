@@ -1,10 +1,15 @@
 <template>
   <div>
-    <img 
-      src="../assets/dino_egg.png" 
+    <video 
+      ref="dinoVideo" 
+      src="../assets/dino_egg_video.mp4" 
       alt="Tilføj kupon" 
-      @click="addNextAvailableCoupon" 
-      class="add-coupon-image"/>
+      class="add-coupon-video"
+      @click="handleVideoClick" 
+      preload="auto"
+      playsinline
+      muted
+    ></video>
 
     <!-- Modal til at vise beskeder -->
     <div v-if="showModal && modalMessage" class="modal">
@@ -54,7 +59,7 @@ export default {
           const descriptionSnapshot = await get(couponDescriptionRef);
           const couponDescription = descriptionSnapshot.exists() ? descriptionSnapshot.val() : "Ingen beskrivelse tilgængelig.";
 
-          // Vis beskeden i modal
+          // Gem besked og vis modal
           this.modalMessage = `Kupon "${couponDescription}" blev tilføjet til din konto!`;
           this.showModal = true; // Åben modal
         } else {
@@ -70,6 +75,17 @@ export default {
 
     closeModal() {
       this.showModal = false; // Luk modal
+    },
+
+    // Håndterer klik på videoen
+    handleVideoClick() {
+      const video = this.$refs.dinoVideo;
+      video.play(); // Start videoen
+
+      // Når videoen er færdig, kald addNextAvailableCoupon
+      video.onended = () => {
+        this.addNextAvailableCoupon(); // Kald kupon-funktionen, når videoen er slut
+      };
     },
 
     // Metode til at finde den aktuelle bruger
@@ -90,3 +106,7 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+
+</style>
