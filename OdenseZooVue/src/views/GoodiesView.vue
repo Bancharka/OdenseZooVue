@@ -54,7 +54,7 @@
     <p>I 14 danske zoo's og akvarier som f.eks. : <br>
     Knuthenborg Safaripark <br>
     Kattegatcentret og <br>
-    Fjord og Bælt <span style="text-decoration: underline;">(se alle på daza.dk)</span>
+    Fjord og Bælt <a href="https://daza.dk/">(se alle på daza.dk)</a>
     </p>
 </div>
 
@@ -67,5 +67,5 @@
     </p>
 </div>
 
-<img src="../img/monkey.png" alt="">
+<img id="monkey" src="../img/monkey.png" alt="illustration af en abe">
 </template>
