@@ -1,8 +1,14 @@
 <template>
-  <div>
+  <div class="video-container">
+    <!-- Hintergrundbild, das immer sichtbar ist und hinter dem Video liegt -->
+    <div class="video-background">
+      <img :src="backgroundImage" alt="Hintergrundbild" />
+    </div>
+
+    <!-- Video mit transparentem Hintergrund -->
     <video 
       ref="dinoVideo" 
-      src="../assets/dino_egg_video.mp4" 
+      src="../assets/dino_egg_video.webm" 
       alt="Tilføj kupon" 
       class="add-coupon-video"
       @click="handleVideoClick" 
@@ -10,14 +16,6 @@
       playsinline
       muted
     ></video>
-
-    <!-- Modal til at vise beskeder -->
-    <div v-if="showModal && modalMessage" class="modal">
-      <div class="modal-content">
-        <span class="close" @click="closeModal">&times;</span>
-        <p>{{ modalMessage }}</p>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -31,82 +29,110 @@ export default {
     return {
       userId: null, // ID for den loggede bruger
       couponOrder: ["coupon_id_4", "coupon_id_5", "coupon_id_6"], // Bestem rækkefølge for kuponer
-      modalMessage: "", // Beskeden der skal vises i modal
-      showModal: false // Tjekker om modal er åben
+      backgroundImage: "", // Anfangszustand: leeres Bild
     };
   },
   methods: {
-    async addNextAvailableCoupon() {
-      console.log("addNextAvailableCoupon kaldt. showModal før:", this.showModal);
-      if (this.userId) {
-        const userCouponsRef = ref(database, `users/${this.userId}/available_coupons`);
-        
-        // Hent brugerens nuværende kuponstatus fra databasen
-        const snapshot = await get(userCouponsRef);
-        const userCoupons = snapshot.exists() ? snapshot.val() : {};
-
-        // Find den første kupon i rækkefølgen, som endnu ikke er sat til true
-        const nextCouponId = this.couponOrder.find(couponId => !userCoupons[couponId]);
-
-        if (nextCouponId) {
-          // Sæt den næste tilgængelige kupon til true
-          await update(userCouponsRef, {
-            [nextCouponId]: true
-          });
-
-          // Hent kuponbeskrivelsen fra databasen
-          const couponDescriptionRef = ref(database, `coupons/${nextCouponId}/description`);
-          const descriptionSnapshot = await get(couponDescriptionRef);
-          const couponDescription = descriptionSnapshot.exists() ? descriptionSnapshot.val() : "Ingen beskrivelse tilgængelig.";
-
-          // Gem besked og vis modal
-          this.modalMessage = `Kupon "${couponDescription}" blev tilføjet til din konto!`;
-          this.showModal = true; // Åben modal
-        } else {
-          this.modalMessage = "Du har allerede alle tilgængelige kuponer.";
-          this.showModal = true; // Åben modal
-        }
-      } else {
-        this.modalMessage = "Bruger er ikke logget ind.";
-        this.showModal = true; // Åben modal
-      }
-      console.log("addNextAvailableCoupon afsluttet. showModal efter:", this.showModal);
-    },
-
-    closeModal() {
-      this.showModal = false; // Luk modal
-    },
-
-    // Håndterer klik på videoen
-    handleVideoClick() {
-      const video = this.$refs.dinoVideo;
-      video.play(); // Start videoen
-
-      // Når videoen er færdig, kald addNextAvailableCoupon
-      video.onended = () => {
-        this.addNextAvailableCoupon(); // Kald kupon-funktionen, når videoen er slut
-      };
-    },
-
-    // Metode til at finde den aktuelle bruger
+    // Methode zur Initialisierung des Benutzers
     initializeUser() {
       const auth = getAuth();
       const user = auth.currentUser;
 
       if (user) {
-        this.userId = user.uid; // Gem bruger-ID, hvis brugeren er logget ind
+        this.userId = user.uid; // Setze die Benutzer-ID, wenn der Benutzer eingeloggt ist
       } else {
-        console.error("Ingen bruger er logget ind.");
+        console.error("Kein Benutzer eingeloggt.");
+      }
+    },
+
+    // Methode zum Handhaben des Klicks auf das Video
+    handleVideoClick() {
+      const video = this.$refs.dinoVideo;
+      
+      // Das Hintergrundbild sofort ändern
+      this.updateBackgroundImage(); // Hintergrundbild setzen
+
+      video.play(); // Video starten
+
+      // Wenn das Video endet, rufen wir die Funktion zum Hinzufügen des nächsten Coupons auf
+      video.onended = () => {
+        this.addNextAvailableCoupon(); // Coupon hinzufügen, wenn das Video zu Ende ist
+      };
+    },
+
+    // Methode zum Aktualisieren des Hintergrundbildes
+    async updateBackgroundImage() {
+      // Hintergrundbild ändern
+      if (this.userId) {
+        const userCouponsRef = ref(database, `users/${this.userId}/available_coupons`);
+        
+        // Benutzer-Coupons aus der Datenbank holen
+        const snapshot = await get(userCouponsRef);
+        const userCoupons = snapshot.exists() ? snapshot.val() : {};
+
+        // Den nächsten Coupon finden, der noch nicht verwendet wurde
+        const nextCouponId = this.couponOrder.find(couponId => !userCoupons[couponId]);
+
+        if (nextCouponId) {
+          // Die Coupon-Daten aus der Datenbank holen
+          const couponRef = ref(database, `coupons/${nextCouponId}`);
+          const couponSnapshot = await get(couponRef);
+          const couponData = couponSnapshot.exists() ? couponSnapshot.val() : {};
+
+          // Wenn kein Bild vorhanden ist, ein Standardbild verwenden
+          const couponImageUrl = couponData.imageUrl || "../assets/default_coupon_image.png";
+          
+          // Hintergrundbild setzen
+          this.backgroundImage = couponImageUrl;
+        }
+      }
+    },
+
+    // Methode zum Hinzufügen des nächsten verfügbaren Coupons
+    async addNextAvailableCoupon() {
+      console.log("addNextAvailableCoupon aufgerufen.");
+
+      if (this.userId) {
+        const userCouponsRef = ref(database, `users/${this.userId}/available_coupons`);
+
+        // Benutzer-Coupons aus der Datenbank holen
+        const snapshot = await get(userCouponsRef);
+        const userCoupons = snapshot.exists() ? snapshot.val() : {};
+
+        // Den nächsten Coupon finden, der noch nicht aktiviert wurde
+        const nextCouponId = this.couponOrder.find(couponId => !userCoupons[couponId]);
+
+        if (nextCouponId) {
+          // Den Coupon als verfügbar markieren
+          await update(userCouponsRef, {
+            [nextCouponId]: true
+          });
+
+          // Die Coupon-Beschreibung und das Bild aus der Datenbank holen
+          const couponRef = ref(database, `coupons/${nextCouponId}`);
+          const couponSnapshot = await get(couponRef);
+          const couponData = couponSnapshot.exists() ? couponSnapshot.val() : {};
+
+          const couponDescription = couponData.description || "Keine Beschreibung verfügbar.";
+          const couponImageUrl = couponData.imageUrl || "../assets/default_coupon_image.png"; // Standardbild, wenn kein Bild gefunden wurde
+
+          console.log(`Coupon "${couponDescription}" wurde zu deinem Konto hinzugefügt!`);
+
+          // Das Hintergrundbild mit der neuen Coupon-URL aktualisieren
+          this.backgroundImage = couponImageUrl;
+        } else {
+          console.log("Alle verfügbaren Coupons wurden bereits hinzugefügt.");
+        }
+      } else {
+        console.error("Benutzer ist nicht eingeloggt.");
       }
     }
   },
 
   created() {
-    this.initializeUser(); // Initialiser brugerdata, når komponenten oprettes
+    this.initializeUser(); // Benutzerinformationen beim Erstellen der Komponente initialisieren
   }
 };
 </script>
 
-<style scoped>
 
-</style>
