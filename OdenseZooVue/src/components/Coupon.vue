@@ -30,7 +30,9 @@
         <p>{{ modalMessage }}</p>
       </div>
     </div>
+
   </div>
+  <img class="imggiraffe" src="/src/img/giraf.png" alt="drawing of a giraffe">
 </template>
 
 

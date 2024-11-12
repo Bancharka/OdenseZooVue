@@ -271,8 +271,10 @@ footer {
 }
 
 .imggiraffe {
-  position:relative;
+  position: fixed;
   z-index: -1;
+  bottom: 60px;
+  width: 200px;
 }
 
 
