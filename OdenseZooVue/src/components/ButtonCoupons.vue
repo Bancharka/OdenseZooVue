@@ -26,111 +26,109 @@ export default {
   data() {
     return {
       userId: null, // ID for den loggede bruger
-      couponOrder: ["coupon_id_4", "coupon_id_5", "coupon_id_6"], // Bestem rækkefølge for kuponer
-      backgroundImage: "", // Anfangszustand: leeres Bild
+      couponOrder: ["coupon_id_7", "coupon_id_8", "coupon_id_9", "coupon_id_10"], // Bestem rækkefølge for kuponer
+      backgroundImage: "", // Initial tilstand: tomt billede
     };
   },
   methods: {
-    // Methode zur Initialisierung des Benutzers
+    // Metode til at initialisere brugeren
     initializeUser() {
       const auth = getAuth();
       const user = auth.currentUser;
 
       if (user) {
-        this.userId = user.uid; // Setze die Benutzer-ID, wenn der Benutzer eingeloggt ist
+        this.userId = user.uid; // Sæt bruger-ID'et, hvis brugeren er logget ind
       } else {
-        console.error("Kein Benutzer eingeloggt.");
+        console.error("Ingen bruger er logget ind.");
       }
     },
 
-    // Methode zum Handhaben des Klicks auf das Video
+    // Metode til at håndtere klik på videoen
     handleVideoClick() {
       const video = this.$refs.dinoVideo;
       
-      // Das Hintergrundbild sofort ändern
-      this.updateBackgroundImage(); // Hintergrundbild setzen
+      // Skift baggrundsbilledet med det samme
+      this.updateBackgroundImage(); // Sæt baggrundsbilledet
 
-      video.play(); // Video starten
+      video.play(); // Start videoen
 
-      // Wenn das Video endet, rufen wir die Funktion zum Hinzufügen des nächsten Coupons auf
+      // Når videoen slutter, tilføjes næste kupon
       video.onended = () => {
-        this.addNextAvailableCoupon(); // Coupon hinzufügen, wenn das Video zu Ende ist
+        this.addNextAvailableCoupon(); // Tilføj kupon, når videoen er færdig
       };
     },
 
-    // Methode zum Aktualisieren des Hintergrundbildes
+    // Metode til at opdatere baggrundsbilledet
     async updateBackgroundImage() {
-      // Hintergrundbild ändern
+      // Skift baggrundsbilledet
       if (this.userId) {
         const userCouponsRef = ref(database, `users/${this.userId}/available_coupons`);
         
-        // Benutzer-Coupons aus der Datenbank holen
+        // Hent brugerens kuponer fra databasen
         const snapshot = await get(userCouponsRef);
         const userCoupons = snapshot.exists() ? snapshot.val() : {};
 
-        // Den nächsten Coupon finden, der noch nicht verwendet wurde
+        // Find den næste kupon, som ikke er blevet brugt
         const nextCouponId = this.couponOrder.find(couponId => !userCoupons[couponId]);
 
         if (nextCouponId) {
-          // Die Coupon-Daten aus der Datenbank holen
+          // Hent kupondata fra databasen
           const couponRef = ref(database, `coupons/${nextCouponId}`);
           const couponSnapshot = await get(couponRef);
           const couponData = couponSnapshot.exists() ? couponSnapshot.val() : {};
 
-          // Wenn kein Bild vorhanden ist, ein Standardbild verwenden
+          // Brug standardbillede, hvis der ikke findes et billede
           const couponImageUrl = couponData.imageUrl || "../assets/default_coupon_image.png";
           
-          // Hintergrundbild setzen
+          // Sæt baggrundsbilledet
           this.backgroundImage = couponImageUrl;
         }
       }
     },
 
-    // Methode zum Hinzufügen des nächsten verfügbaren Coupons
+    // Metode til at tilføje den næste tilgængelige kupon
     async addNextAvailableCoupon() {
-      console.log("addNextAvailableCoupon aufgerufen.");
+      console.log("addNextAvailableCoupon blev kaldt.");
 
       if (this.userId) {
         const userCouponsRef = ref(database, `users/${this.userId}/available_coupons`);
 
-        // Benutzer-Coupons aus der Datenbank holen
+        // Hent brugerens kuponer fra databasen
         const snapshot = await get(userCouponsRef);
         const userCoupons = snapshot.exists() ? snapshot.val() : {};
 
-        // Den nächsten Coupon finden, der noch nicht aktiviert wurde
+        // Find den næste kupon, som ikke er aktiveret
         const nextCouponId = this.couponOrder.find(couponId => !userCoupons[couponId]);
 
         if (nextCouponId) {
-          // Den Coupon als verfügbar markieren
+          // Marker kuponen som tilgængelig
           await update(userCouponsRef, {
             [nextCouponId]: true
           });
 
-          // Die Coupon-Beschreibung und das Bild aus der Datenbank holen
+          // Hent beskrivelse og billede af kuponen fra databasen
           const couponRef = ref(database, `coupons/${nextCouponId}`);
           const couponSnapshot = await get(couponRef);
           const couponData = couponSnapshot.exists() ? couponSnapshot.val() : {};
 
-          const couponDescription = couponData.description || "Keine Beschreibung verfügbar.";
-          const couponImageUrl = couponData.imageUrl || "../assets/default_coupon_image.png"; // Standardbild, wenn kein Bild gefunden wurde
+          const couponDescription = couponData.description || "Ingen beskrivelse tilgængelig.";
+          const couponImageUrl = couponData.imageUrl || "../assets/default_coupon_image.png"; // Standardbillede, hvis der ikke findes et billede
 
-          console.log(`Coupon "${couponDescription}" wurde zu deinem Konto hinzugefügt!`);
+          console.log(`Kupon "${couponDescription}" blev tilføjet til din konto!`);
 
-          // Das Hintergrundbild mit der neuen Coupon-URL aktualisieren
+          // Opdater baggrundsbilledet med den nye kupon-URL
           this.backgroundImage = couponImageUrl;
         } else {
-          console.log("Alle verfügbaren Coupons wurden bereits hinzugefügt.");
+          console.log("Alle tilgængelige kuponer er allerede blevet tilføjet.");
         }
       } else {
-        console.error("Benutzer ist nicht eingeloggt.");
+        console.error("Bruger er ikke logget ind.");
       }
     }
   },
 
   created() {
-    this.initializeUser(); // Benutzerinformationen beim Erstellen der Komponente initialisieren
+    this.initializeUser(); // Initialiser brugerinformation, når komponenten oprettes
   }
 };
 </script>
-
-

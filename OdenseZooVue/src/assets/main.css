@@ -75,7 +75,7 @@ p {
 
 
 .pointpoint {
-  background-color: #abd18fa3;
+  background-color: #ABD18F;
   display: flex;
   text-align: center;
   flex-direction: column;
@@ -132,7 +132,7 @@ p {
 }
 
 #navfordele {
-  background-color: #457443;
+  background-color: #007836;
   width: 100%;
   height: auto;
   color: #EDF0E8;
@@ -147,7 +147,7 @@ p {
 }
 
 #navvilde {
-  background-color: #457443;
+  background-color: #007836;
   width: 100%;
   height: 50px;
   color: #EDF0E8;
