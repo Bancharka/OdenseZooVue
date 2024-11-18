@@ -75,7 +75,7 @@ p {
 
 
 .pointpoint {
-  background-color: #ABD18F;
+  background-color: #e0eec6;
   display: flex;
   text-align: center;
   flex-direction: column;
@@ -218,6 +218,7 @@ footer {
 
 .botnavcolor {
   color: black;
+  font-size: 14px;
 }
 
 
