@@ -5,15 +5,17 @@
     </div>
 
     <video 
-      ref="dinoVideo" 
-      src="../assets/dino_egg_video.webm" 
-      alt="Tilføj kupon" 
-      class="add-coupon-video"
-      @click="handleVideoClick" 
-      preload="auto"
-      playsinline
-      muted
-    ></video>
+    ref="dinoVideo" 
+    class="add-coupon-video"
+    @click="handleVideoClick" 
+    preload="auto"
+    playsinline
+    muted
+    >
+    <source src="../assets/dino_egg_video.webm" type="video/webm" />
+    <source src="../assets/dino_egg_video.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+    </video>  
   </div>
 </template>
 
